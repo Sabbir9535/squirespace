@@ -1,0 +1,44 @@
+(function() {
+  const rssUrl = "https://api.riverside.fm/hosting/KJYymgjs.rss";
+  const finalApi = "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(rssUrl);
+  const container = document.getElementById("podcast-grid-container");
+
+  async function loadPodcast() {
+    try {
+      const response = await fetch(finalApi);
+      const data = await response.json();
+
+      if (data.status !== 'ok') throw new Error("API Error");
+
+      let html = "";
+      const podcastMainImage = data.feed.image;
+
+      data.items.forEach((item, index) => {
+        const title = item.title;
+        const audio = item.enclosure.link;
+        // ইমেজ না থাকলে মেইন লোগো দেখাবে
+        const thumb = item.thumbnail || item.description.match(/src="([^"]+)"/)?.[1] || podcastMainImage;
+        
+        let desc = item.description.replace(/<[^>]*>?/gm, '').substring(0, 120) + "...";
+
+        html += `
+          <div class="podcast-card" style="animation: fadeIn 0.5s forwards ${index * 0.1}s;">
+            <img class="ep-thumb" src="${thumb}" alt="${title}" loading="lazy" onerror="this.src='${podcastMainImage}'">
+            <div class="ep-content">
+              <div class="ep-title">${title}</div>
+              <div class="ep-desc">${desc}</div>
+              <div class="audio-player-wrapper">
+                <audio controls preload="none">
+                  <source src="${audio}" type="audio/mpeg">
+                </audio>
+              </div>
+            </div>
+          </div>`;
+      });
+
+      container.innerHTML = html;
+    } catch (err) {
+      console.error("Podcast Error:", err);
+      container.innerHTML = "<div class='loader-text' style='text-align:center; padding:50px;'>Podcast is taking longer to load. Please <a href='javascript:location.reload()'>refresh</a>.</div>";
+    }
+  }

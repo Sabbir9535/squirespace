@@ -1,0 +1,58 @@
+<div class="filter-bar">
+  <button class="filter-btn active"><a href="/work#all">ALL</a></button>
+  <button class="filter-btn"><a href="/work#commercial">COMMERCIAL</a></button>
+  <button class="filter-btn"><a href="/work#brand-content">BRANDED CONTENT</a></button>
+  <button class="filter-btn"><a href="/work#fashion-beauty">FASHION & BEAUTY</a></button>
+  <button class="filter-btn"><a href="/work#social-media">SOCIAL MEDIA</a></button>
+  <button class="filter-btn"><a href="/work#corporate">CORPORATE</a></button>
+  <button class="filter-btn"><a href="/work#inteview">INTERVIEWS</a></button>
+</div>
+
+<style>
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  position: sticky;
+  top: 80px; /* header height অনুযায়ী adjust করো */
+  z-index: 999;
+  justify-content:start;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border: 1px solid #333;
+  background: transparent;
+  color: #aaa;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  color: #fff;
+  border-color: #666;
+}
+
+.filter-btn.active {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+</style>
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+  

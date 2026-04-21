@@ -1,0 +1,201 @@
+<div class="ultra-scroll">
+  <a href="/#products" class="scroll-link">
+
+    <!-- TEXT -->
+    <div class="scroll-text">Scroll</div>
+
+    <!-- VISUAL -->
+    <div class="scroll-visual">
+
+      <!-- Circle -->
+      <div class="scroll-circle">
+        <div class="pulse-ring"></div>
+        <div class="center-dot"></div>
+      </div>
+
+      <!-- Line -->
+      <div class="scroll-line">
+        <div class="scroll-dot"></div>
+      </div>
+
+      <!-- Arrows -->
+      <div class="scroll-arrows">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+    </div>
+
+  </a>
+</div>
+
+<style>
+
+/* === POSITION === */
+.ultra-scroll {
+  position: absolute;
+  bottom: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
+/* === LINK === */
+.scroll-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* === TEXT (BOLDER) === */
+.scroll-text {
+  font-size: 12px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 20px;
+  font-weight: 400;
+  transition: all 0.4s ease;
+}
+
+/* === VISUAL WRAPPER === */
+.scroll-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* === CIRCLE (MORE STRONG) === */
+.scroll-circle {
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+/* center dot */
+.center-dot {
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* pulse */
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  border-radius: 50%;
+  animation: pulse 1.8s infinite;
+}
+
+/* === LINE (BOLDER) === */
+.scroll-line {
+  width: 2px;
+  height: 90px;
+  background: rgba(255,255,255,0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+/* dot */
+.scroll-dot {
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: dotMove 1.8s infinite;
+}
+
+/* === ARROWS (CLEAR CTA) === */
+.scroll-arrows {
+  margin-top: 12px;
+}
+
+.scroll-arrows span {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg);
+  margin: -3px auto;
+  opacity: 0;
+  animation: arrowAnim 1.5s infinite;
+}
+
+.scroll-arrows span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.scroll-arrows span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* === ANIMATION === */
+
+@keyframes dotMove {
+  0% { top: 0; opacity: 0; }
+  20% { opacity: 1; }
+  80% { top: 75px; opacity: 1; }
+  100% { top: 90px; opacity: 0; }
+}
+
+@keyframes arrowAnim {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translate(-6px,-6px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translate(6px,6px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* === HOVER === */
+.scroll-link:hover .scroll-text {
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.scroll-link:hover .scroll-circle {
+  border-color: #fff;
+}
+
+/* === MOBILE === */
+@media(max-width:768px){
+  .scroll-line {
+    height: 60px;
+  }
+}
+
+</style>

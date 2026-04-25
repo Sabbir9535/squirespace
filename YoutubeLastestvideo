@@ -1,0 +1,33 @@
+<div id="latest-video"></div>
+
+<script>
+const channelId = "UC2x6uVQJ4ZD2hknbPDcGehQ";
+
+const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+
+fetch(`https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`)
+  .then(res => res.json())
+  .then(data => {
+    if (!data.items || data.items.length === 0) {
+      document.getElementById("latest-video").innerHTML = "No video found";
+      return;
+    }
+
+    const latest = data.items[0];
+    const videoId = latest.link.split("v=")[1];
+
+    document.getElementById("latest-video").innerHTML = `
+      <div style="position:relative;padding-bottom:56.25%;height:0;">
+        <iframe 
+          src="https://www.youtube.com/embed/${videoId}" 
+          
+          style="position:absolute;width:100%;height:100%;top:0;left:0;border:0;"
+          allowfullscreen>
+        </iframe>
+      </div>
+    `;
+  })
+  .catch(() => {
+    document.getElementById("latest-video").innerHTML = "Video load failed";
+  });
+</script>

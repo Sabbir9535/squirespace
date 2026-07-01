@@ -1,0 +1,28 @@
+
+/* Remove default underline */
+.header-nav-item--active a,
+.header-nav-item--active a:hover {
+    background-image: none !important;
+    text-decoration: none !important;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+/* Red dot */
+.header-nav-item--active a::after {
+    content: "";
+    position: absolute;
+    left: 10%;
+    bottom: -4px;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ff2b2b;
+}
+
+/* Remove underline from all menu items on hover */
+.header-nav-item a,
+.header-nav-item a:hover {
+    background-image: none !important;
+}
